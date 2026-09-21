@@ -21,7 +21,8 @@ public class SpielGUI extends JFrame
     {
         fenster.add(hauptPanel);
         fenster.setVisible(true);
-        
+        fenster.setSize(1000, 900);
+        fenster.setMinimumSize(new Dimension(900, 700));
     }
 
     /**

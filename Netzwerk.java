@@ -1,4 +1,5 @@
-
+import java.net.*;
+import java.io.*;
 /**
  * Beschreiben Sie hier die Klasse Netzwerk.
  * 
@@ -8,15 +9,18 @@
 public class Netzwerk
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
-    private int x;
-
+    private ServerSocket serverSocket;
+    private Socket clientSocket;
+    private PrintWriter out;
+    private BufferedReader in;
+    private String messagePlayer2;
     /**
      * Konstruktor für Objekte der Klasse Netzwerk
      */
     public Netzwerk()
     {
         // Instanzvariable initialisieren
-        x = 0;
+        
     }
 
     /**
@@ -25,9 +29,19 @@ public class Netzwerk
      * @param  y    ein Beispielparameter für eine Methode
      * @return        die Summe aus x und y
      */
-    public int beispielMethode(int y)
+    public void start(int port) throws IOException, UnknownHostException, ClassNotFoundException, InterruptedException 
     {
-        // tragen Sie hier den Code ein
-        return x + y;
+        serverSocket = new ServerSocket(port);
+        clientSocket = serverSocket.accept();
+        out = new PrintWriter(clientSocket.getOutputStream(), true);
+        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        String inputLine;
+        while((inputLine = in.readLine()) != null){
+            if ("match.finished".equals(inputLine)){
+                out.println("good bye");
+                break;
+            }
+            messagePlayer2 = inputLine;
+        }
     }
 }
