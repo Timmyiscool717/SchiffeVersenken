@@ -9,6 +9,8 @@ public class Spielverwaltung
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private Schiff [] schiffe = new Schiff[4];
+    private Spieler spieler1,spieler2;
+    private Spieler aktuellerSpieler;
     
 
     /**
@@ -17,7 +19,8 @@ public class Spielverwaltung
     public Spielverwaltung()
     {
         schiffe[0]= new Schiff(2,0,0);
-        
+        spieler1 = new Spieler();
+        spieler2 = new Spieler();
     }
 
     /**
