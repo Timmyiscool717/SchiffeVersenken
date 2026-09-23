@@ -19,9 +19,15 @@ public class Schiff
      */
     public Schiff(int pLaenge, int pPosX, int pPosY)
     {
-        laenge = pLaenge;
+        if (pLaenge >= 5 || pLaenge <=2){
+            laenge = pLaenge;
+        }
+        else {
+            System.out.println("das schiff ist ungültig lang, gebe eine Länge zwischen 1 und 5 an");
+        }
         posX = pPosX;
         posY = pPosY;
+        
         for(int i = 0; i<laenge; i++){
             teileGetroffen[i] = false;
         }
