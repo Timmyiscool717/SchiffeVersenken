@@ -8,7 +8,8 @@
 public class Spieler
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
-    private int x;
+    private String name
+    private int anzahlSchiffe,;
 
     /**
      * Konstruktor für Objekte der Klasse Spieler

@@ -11,6 +11,7 @@ public class Spielverwaltung
     private Schiff [] schiffe = new Schiff[4];
     private Spieler spieler1,spieler2;
     private Spieler aktuellerSpieler;
+    private boolean gesetzt;
     
 
     /**
@@ -21,6 +22,9 @@ public class Spielverwaltung
         schiffe[0]= new Schiff(2,0,0);
         spieler1 = new Spieler();
         spieler2 = new Spieler();
+        aktuellerSpieler = spieler1;
+        gesetzt = false;
+        
     }
 
     /**
