@@ -33,8 +33,33 @@ public class Spielverwaltung
      * @param  y    ein Beispielparameter für eine Methode
      * @return        die Summe aus x und y
      */
-    public void beispielMethode()
+    public static void main(String[] args)
+    {
+        Spielverwaltung neuesSpiel = new Spielverwaltung();
+        neuesSpiel.addText("Herzlich willkommen hier beim ultimativen 'Verflixte Sieben'-Spiel.\n" + neuesSpiel.aktuellerSpieler.getName() + ", Du fängst an mit einem Vermögen von " + neuesSpiel.aktuellerSpieler.getVermoegen() + ". Bitte setze Deinen Einsatz.\n");
+    }
+    public void spielerWechsel()
     {
         
+        if (aktuellerSpieler == spieler1)
+        {
+            spieler1 = aktuellerSpieler;
+            aktuellerSpieler = spieler2;
+        } else
+        {
+            spieler2 = aktuellerSpieler;
+            aktuellerSpieler = spieler1;
+        }
+    }
+    
+    public Spieler nichtAktuellerSpieler()
+    {
+        if (aktuellerSpieler == spieler1)
+        {
+            return spieler2;
+        } else
+        {
+            return spieler1;
+        }
     }
 }
