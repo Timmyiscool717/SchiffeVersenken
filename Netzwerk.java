@@ -9,11 +9,19 @@ import java.io.*;
 public class Netzwerk
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
-    private ServerSocket serverSocket;
-    private Socket clientSocket;
+    public interface Listener{
+        void nachrichtEmpfangen(String nachricht);
+        void verbindungGeschlossen();
+        void verbindungsfehler(Exception e);
+    }
+    private Socket socket;
     private PrintWriter out;
     private BufferedReader in;
-    private String messagePlayer2;
+    private Listener listener;
+    private Thread anfangsThread;
+    public void setListener(Listener listener){
+        this.listener = listener;
+    }
     /**
      * Konstruktor für Objekte der Klasse Netzwerk
      */
@@ -22,26 +30,50 @@ public class Netzwerk
         // Instanzvariable initialisieren
         
     }
-
+    private void initialisierenStreams() throws IOException {
+        in = new BufferedReader(
+            new InputStreamReader(socket.getInputStream(), "UTF-8"));
+        out = new PrintWriter(
+            new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
+    }
     /**
      * Ein Beispiel einer Methode - ersetzen Sie diesen Kommentar mit Ihrem eigenen
      * 
      * @param  y    ein Beispielparameter für eine Methode
      * @return        die Summe aus x und y
      */
-    public void start(int port) throws IOException, UnknownHostException, ClassNotFoundException, InterruptedException 
+    public void start(int port) throws IOException
     {
-        serverSocket = new ServerSocket(port);
-        clientSocket = serverSocket.accept();
-        out = new PrintWriter(clientSocket.getOutputStream(), true);
-        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        String inputLine;
-        while((inputLine = in.readLine()) != null){
-            if ("match.finished".equals(inputLine)){
-                out.println("good bye");
-                break;
-            }
-            messagePlayer2 = inputLine;
+        ServerSocket server = new ServerSocket(port);
+        try {
+            socket = server.accept();
+        } finally{
+            server.close();
         }
+        initialisierenStreams();
+        starteEmpfangsThread();
+    }
+    public void client(String ip, int port) throws IOException {
+        socket = new Socket();
+        socket.connect(new InetSocketAddress(ip, port), 8000);
+        initialisierenStreams();
+        starteEmpfangsThread();
+    }
+    private void starteEmpfangsThread() {
+        anfangsThread = new Thread(() -> {
+            try {
+                String zeile;
+                while ((zeile = in.readLine()) != null) {
+                    if (listener != null) {
+                        listener.nachrichtEmpfangen(zeile);
+                    }
+                }
+                if (listener != null) listener.verbindungGeschlossen();
+            } catch (IOException e) {
+                if (listener != null) listener.verbindungsfehler(e);
+            }
+        }, "Netzwerk-Empfang");
+        anfangsThread.setDaemon(true);
+        anfangsThread.start();
     }
 }
