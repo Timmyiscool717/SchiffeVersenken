@@ -1,4 +1,19 @@
-
+import java.awt.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.text.DefaultCaret;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.IOException;
+import java.lang.Exception;
+import javax.swing.Timer;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+ 
 /**
  * Beschreiben Sie hier die Klasse Spielverwaltung.
  * 
@@ -20,8 +35,8 @@ public class Spielverwaltung
     public Spielverwaltung()
     {
         schiffe[0]= new Schiff(2,0,0);
-        spieler1 = new Spieler();
-        spieler2 = new Spieler();
+        spieler1 = new Spieler(10);
+        spieler2 = new Spieler(10);
         aktuellerSpieler = spieler1;
         gesetzt = false;
         
@@ -36,7 +51,7 @@ public class Spielverwaltung
     public static void main(String[] args)
     {
         Spielverwaltung neuesSpiel = new Spielverwaltung();
-        neuesSpiel.addText("Herzlich willkommen hier beim ultimativen 'Verflixte Sieben'-Spiel.\n" + neuesSpiel.aktuellerSpieler.getName() + ", Du fängst an mit einem Vermögen von " + neuesSpiel.aktuellerSpieler.getVermoegen() + ". Bitte setze Deinen Einsatz.\n");
+        
     }
     public void spielerWechsel()
     {
@@ -61,5 +76,11 @@ public class Spielverwaltung
         {
             return spieler1;
         }
+    }
+    public Schiff gameOver(){
+        if (getVersenkt() == true){
+        
+        }
+    
     }
 }

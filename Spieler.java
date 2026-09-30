@@ -10,7 +10,7 @@ public class Spieler
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private String name;
     private int anzahlSchiffe;
-
+    
     /**
      * Konstruktor für Objekte der Klasse Spieler
      */
@@ -22,5 +22,13 @@ public class Spieler
 
     public int getAnzahlschiffe() {
        return anzahlSchiffe;
+    }
+    public void setName(String neuerName)
+    {
+       name = neuerName;
+    }
+   
+    public String getName() {
+       return name;
     }
 }
