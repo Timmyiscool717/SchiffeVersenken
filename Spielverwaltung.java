@@ -23,6 +23,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Spielverwaltung 
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
+    private boolean host;
     private Schiff [] schiffe = new Schiff[4];
     private Spieler spieler1,spieler2;
     private Spieler aktuellerSpieler;
@@ -32,8 +33,9 @@ public class Spielverwaltung
     /**
      * Konstruktor für Objekte der Klasse Spielverwaltung
      */
-    public Spielverwaltung()
+    public Spielverwaltung(boolean host)
     {
+        this.host = host;
         schiffe[0]= new Schiff(2,0,0);
         spieler1 = new Spieler(10);
         spieler2 = new Spieler(10);
@@ -42,17 +44,6 @@ public class Spielverwaltung
         
     }
 
-    /**
-     * Ein Beispiel einer Methode - ersetzen Sie diesen Kommentar mit Ihrem eigenen
-     * 
-     * @param  y    ein Beispielparameter für eine Methode
-     * @return        die Summe aus x und y
-     */
-    public static void main(String[] args)
-    {
-        Spielverwaltung neuesSpiel = new Spielverwaltung();
-        
-    }
     public void spielerWechsel()
     {
         
@@ -77,10 +68,5 @@ public class Spielverwaltung
             return spieler1;
         }
     }
-    public Schiff gameOver(){
-        if (getVersenkt() == true){
-        
-        }
     
-    }
 }
