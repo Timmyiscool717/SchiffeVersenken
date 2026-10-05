@@ -76,4 +76,15 @@ public class Netzwerk
         anfangsThread.setDaemon(true);
         anfangsThread.start();
     }
+    public synchronized void send(String nachricht){
+        if (out != null){
+            out.println(nachricht);
+        }
+    }
+    public void schliessen() {
+        try {
+            if (socket != null) socket.close();
+        } catch (IOException ignored)  {
+        }
+    }
 }
