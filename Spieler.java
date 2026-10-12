@@ -14,7 +14,7 @@ public class Spieler
     /**
      * Konstruktor für Objekte der Klasse Spieler
      */
-    public Spieler(int anzahlSchiffe)
+    public Spieler()
     {
         // Instanzvariable initialisieren
         anzahlSchiffe = 10;

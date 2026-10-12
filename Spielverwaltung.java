@@ -37,8 +37,8 @@ public class Spielverwaltung
     {
         this.host = host;
         schiffe[0]= new Schiff(2,0,0);
-        spieler1 = new Spieler(10);
-        spieler2 = new Spieler(10);
+        spieler1 = new Spieler();
+        spieler2 = new Spieler();
         aktuellerSpieler = spieler1;
         gesetzt = false;
         
