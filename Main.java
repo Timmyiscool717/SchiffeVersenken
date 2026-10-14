@@ -5,6 +5,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Beschreiben Sie hier die Klasse Main.
@@ -21,10 +22,12 @@ public class Main
     private JRadioButton hostButton;
     private JRadioButton clientButton;
     private String bColor = "#9b9b9b";
-    private BufferedImage img = ImageIO.read(new File("bild.jpg"));
+    private BufferedImage img;
+    private JLabel img1;
 
     public static void main (String[] args){
         SwingUtilities.invokeLater(() -> new Main().Startfenster());
+    
     }
 
     /**
@@ -38,30 +41,35 @@ public class Main
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 400);
         frame.setLocationRelativeTo(null);
-        frame.setBackground(Color.decode(bColor));
+    
+        try
+        {
+            img = ImageIO.read(this.getClass().getResource("bild1.png"));
+        }   
+        catch(IOException ex)
+        {
+            System.out.println ("Bilddatei nicht gefunden");
+        }
+        img1 = new JLabel(new ImageIcon(img));
+        img1.setAlignmentX(Component.CENTER_ALIGNMENT);
+        frame.add(img1);
         
-      
         JPanel root = new JPanel(new BorderLayout(10, 10));
         root.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
-        root.setBackground(Color.decode(bColor));  
         JLabel title = new JLabel("Schiffe Versenken", SwingConstants.CENTER);
         title.setFont(title.getFont().deriveFont(Font.BOLD, 24f));
         root.add(title, BorderLayout.NORTH);
         
-        
         JPanel center = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(6, 6, 6, 6);
-        c.anchor = GridBagConstraints.WEST;
-        center.setBackground(Color.decode(bColor));  
+        c.anchor = GridBagConstraints.WEST; 
       
         hostButton = new JRadioButton("Spiel hosten", true);
         clientButton = new JRadioButton("Beitreten");
         ButtonGroup group = new ButtonGroup();
         group.add(hostButton);
         group.add(clientButton);
-        hostButton.setBackground(Color.decode(bColor));
-        clientButton.setBackground(Color.decode(bColor));
         c.gridx = 0;c.gridy = 0;
         center.add(hostButton, c);
         c.gridx = 1;
@@ -83,21 +91,19 @@ public class Main
         
         JButton start = new JButton("Starten");
         start.addActionListener(e -> starten());
-        start.setBackground(Color.decode(bColor));
             
         JPanel bottom = new JPanel();
         bottom.add(start);
-        bottom.setBackground(Color.decode(bColor));
         root.add(bottom, BorderLayout.SOUTH);
         
         hostButton.addActionListener(e -> ipField.setEnabled(false));
         clientButton.addActionListener(e -> ipField.setEnabled(true));
         ipField.setEnabled(false);
         
+        frame.pack();
         frame.setContentPane(root);
         frame.setVisible(true);
     }
-    
     private void starten(){
         int port;
         try {
