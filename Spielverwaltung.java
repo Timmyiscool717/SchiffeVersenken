@@ -37,6 +37,16 @@ public class Spielverwaltung
     {
         this.host = host;
         schiffe[0]= new Schiff(2,0,0);
+        schiffe[1]= new Schiff(2,0,0);
+        schiffe[2]= new Schiff(2,0,0);
+        schiffe[3]= new Schiff(2,0,0);
+        schiffe[4]= new Schiff(3,0,0);
+        schiffe[5]= new Schiff(3,0,0);
+        schiffe[6]= new Schiff(3,0,0);
+        schiffe[7]= new Schiff(4,0,0);
+        schiffe[8]= new Schiff(4,0,0);
+        schiffe[9]= new Schiff(5,0,0);
+        
         spieler1 = new Spieler();
         spieler2 = new Spieler();
         aktuellerSpieler = spieler1;
