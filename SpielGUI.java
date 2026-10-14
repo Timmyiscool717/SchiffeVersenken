@@ -4,6 +4,8 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.IOException;
+import java.io.File;
+
 /**
  * Beschreiben Sie hier die Klasse SpielGUI.
  * 
@@ -17,7 +19,8 @@ public class SpielGUI extends JFrame
     private JPanel hauptPanel = new JPanel();
     private JLabel spielbrettAnzeige;
     
-    private BufferedImage spielbrettBild;
+    //private BufferedImage spielbrettBild;
+    private ImageIcon spielbrettBild = new ImageIcon("beispiel_spielbrett_schiffeversenken.webp");
     /**
      * Konstruktor für Objekte der Klasse SpielGUI
      */
@@ -25,18 +28,15 @@ public class SpielGUI extends JFrame
     {
         fenster.add(hauptPanel);
         fenster.setTitle("Schiffe versenken");
-        fenster.setVisible(true);
         fenster.setSize(1000, 900);
         fenster.setMinimumSize(new Dimension(900, 700));
         fenster.setBackground(Color.BLUE);
-        try{
-            spielbrettBild = ImageIO.read(this.getClass().getResource("warrior.png"));
-        }
-        catch(IOException ex)
-        {
-            System.out.println ("Bilddatei nicht gefunden");
-        }
-        spielbrettAnzeige = new JLabel(new ImageIcon(spielbrettBild));
+        fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        spielbrettAnzeige = new JLabel(spielbrettBild);
+        fenster.add(spielbrettAnzeige);
+        fenster.pack();
+        fenster.setVisible(true);
     }
 
     /**
