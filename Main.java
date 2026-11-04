@@ -22,8 +22,7 @@ public class Main
     private JRadioButton hostButton;
     private JRadioButton clientButton;
     private String bColor = "#9b9b9b";
-    private BufferedImage img;
-    private JLabel img1;
+    
 
     public static void main (String[] args){
         SwingUtilities.invokeLater(() -> new Main().Startfenster());
@@ -41,30 +40,23 @@ public class Main
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 400);
         frame.setLocationRelativeTo(null);
-    
-        try
-        {
-            img = ImageIO.read(this.getClass().getResource("bild1.png"));
-        }   
-        catch(IOException ex)
-        {
-            System.out.println ("Bilddatei nicht gefunden");
-        }
-        img1 = new JLabel(new ImageIcon(img));
-        img1.setAlignmentX(Component.CENTER_ALIGNMENT);
-        frame.add(img1);
+        ImageIcon icon = new ImageIcon("bild1.png");
+        
+        
+        
         
         JPanel root = new JPanel(new BorderLayout(10, 10));
         root.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
-        JLabel title = new JLabel("Schiffe Versenken", SwingConstants.CENTER);
-        title.setFont(title.getFont().deriveFont(Font.BOLD, 24f));
+        JLabel title = new JLabel(icon);
+        title.setSize(5,5);
         root.add(title, BorderLayout.NORTH);
+        
         
         JPanel center = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(6, 6, 6, 6);
         c.anchor = GridBagConstraints.WEST; 
-      
+        
         hostButton = new JRadioButton("Spiel hosten", true);
         clientButton = new JRadioButton("Beitreten");
         ButtonGroup group = new ButtonGroup();
@@ -119,6 +111,6 @@ public class Main
         
         frame.dispose();
         
-        Spielverwaltung spiel = new Spielverwaltung(host);
+        SpielGUI spiel = new SpielGUI();
     }
 }
