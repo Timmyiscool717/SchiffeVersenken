@@ -20,7 +20,7 @@ public class SpielGUI extends JFrame
     private JLabel spielbrettAnzeige;
     
     //private BufferedImage spielbrettBild;
-    private ImageIcon spielbrettBild = new ImageIcon("beispiel_spielbrett_schiffeversenken.webp");
+    private ImageIcon spielbrettBild = new ImageIcon("beispiel_spielbrett_schiffeversenken.png");
     /**
      * Konstruktor für Objekte der Klasse SpielGUI
      */
