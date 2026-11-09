@@ -11,9 +11,8 @@ import java.io.File;
  * @author (Ihr Name) 
  * @version (eine Versionsnummer oder ein Datum)
  */
-public class Karte
+public class Karte extends JPanel
 {
-    
     
     
     /**
@@ -21,8 +20,9 @@ public class Karte
      */
     public Karte()
     {
-        // Instanzvariable initialisieren
         
+        setBackground(Color.WHITE);
+        setPreferredSize(new Dimension(400,400));
     }
 
     /**
@@ -31,9 +31,18 @@ public class Karte
      * @param  y    ein Beispielparameter für eine Methode
      * @return        die Summe aus x und y
      */
-    public int beispielMethode(int y)
+    @Override
+    protected void paintComponent(Graphics g)
     {
-        // tragen Sie hier den Code ein
-        return y;
+        super.paintComponent(g);
+        int w = getWidth()/10;
+        int h = getHeight()/10;
+        g.setColor(Color.BLACK);
+        for(int y = 0; y < 10; y++){
+            for(int x = 0; x < 10; x++){
+                g.drawRect(x*w,y*h,w,h);
+            }
+        }
+        
     }
 }
