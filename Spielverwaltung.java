@@ -24,10 +24,12 @@ public class Spielverwaltung
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private boolean host;
-    private Schiff [] schiffe = new Schiff[4];
+    private Schiff [] schiffe = new Schiff[9];
     private Spieler spieler1,spieler2;
     private Spieler aktuellerSpieler;
     private boolean gesetzt;
+    private boolean horizontal;
+    
     
 
     /**
@@ -51,6 +53,7 @@ public class Spielverwaltung
         spieler2 = new Spieler();
         aktuellerSpieler = spieler1;
         gesetzt = false;
+        horizontal = false;
         
     }
 
@@ -76,6 +79,26 @@ public class Spielverwaltung
         } else
         {
             return spieler1;
+        }
+    }
+    
+    public void schiffePlatzieren(int pPosX,int pPosY){
+        int[] laengen = {2, 2, 2, 2, 3, 3, 3, 4, 4, 5};
+        for (int i = 0; i < 9;i++){
+            while(!gesetzt){
+                int x = pPosX;
+                int y = pPosY;
+                if(horizontal){
+                    int endeX = x + laengen[i];
+                    int endeY = y;
+                }else{
+                    int endeY = y + laengen[i];
+                    int endeX = x;
+                }
+                
+                
+            }
+        
         }
     }
     
