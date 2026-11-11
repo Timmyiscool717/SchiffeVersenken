@@ -33,10 +33,13 @@ public class SpielGUI extends JFrame
         fenster.setBackground(Color.BLUE);
         fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        spielbrettAnzeige = new JLabel(spielbrettBild);
+        /**spielbrettAnzeige = new JLabel(spielbrettBild);
         fenster.add(spielbrettAnzeige);
-        fenster.pack();
+        fenster.pack();**/
         fenster.setVisible(true);
+        
+        Karte spielplan = new Karte();
+        hauptPanel.add(spielplan);
     }
 
     /**
@@ -47,7 +50,7 @@ public class SpielGUI extends JFrame
      */
     public void beispielMethode()
     {
-        // tragen Sie hier den Code ein
-        
+        Karte spielplan = new Karte();
+        hauptPanel.add(spielplan);
     }
 }

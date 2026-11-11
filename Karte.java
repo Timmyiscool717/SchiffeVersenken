@@ -14,15 +14,28 @@ import java.io.File;
 public class Karte extends JPanel
 {
     
-    
+    private JButton[][] spielfeld = new JButton[10][10]; 
     /**
      * Konstruktor für Objekte der Klasse Karte
      */
     public Karte()
     {
-        
-        setBackground(Color.WHITE);
+        setBackground(Color.BLACK);
         setPreferredSize(new Dimension(400,400));
+        setLayout(new GridLayout(10, 10));
+        for(int y=0;y< 10; y++){
+            for(int x = 0; x < 10; x++){
+                spielfeld[x][y] = new JButton(); 
+                spielfeld[x][y].setBackground(Color.BLUE);
+                spielfeld[x][y].setForeground(Color.RED);
+                spielfeld[x][y].setOpaque(true);
+                final int posX = x;
+                final int posY = y;
+                spielfeld[x][y].setVisible(true);
+                spielfeld[x][y].addActionListener(e-> spielfeldKlick(posX,posY));
+                this.add(spielfeld[x][y]);
+            }
+        }
     }
 
     /**
@@ -31,18 +44,7 @@ public class Karte extends JPanel
      * @param  y    ein Beispielparameter für eine Methode
      * @return        die Summe aus x und y
      */
-    @Override
-    protected void paintComponent(Graphics g)
-    {
-        super.paintComponent(g);
-        int w = getWidth()/10;
-        int h = getHeight()/10;
-        g.setColor(Color.BLACK);
-        for(int y = 0; y < 10; y++){
-            for(int x = 0; x < 10; x++){
-                g.drawRect(x*w,y*h,w,h);
-            }
-        }
-        
+    public void spielfeldKlick(int pPosX, int pPosY){
+        System.out.println("Button" + pPosX + "|" + pPosY);
     }
 }
