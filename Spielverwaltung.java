@@ -38,7 +38,7 @@ public class Spielverwaltung
     public Spielverwaltung(boolean host)
     {
         this.host = host;
-        schiffe[0]= new Schiff(2,0,0);
+        /*schiffe[0]= new Schiff(2,0,0);
         schiffe[1]= new Schiff(2,0,0);
         schiffe[2]= new Schiff(2,0,0);
         schiffe[3]= new Schiff(2,0,0);
@@ -53,8 +53,8 @@ public class Spielverwaltung
         spieler2 = new Spieler();
         aktuellerSpieler = spieler1;
         gesetzt = false;
-        horizontal = false;
-        
+        horizontal = false;*/
+        SpielGUI gui = new SpielGUI();
     }
 
     public void spielerWechsel()

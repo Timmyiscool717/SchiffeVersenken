@@ -111,6 +111,6 @@ public class Main
         
         frame.dispose();
         
-        SpielGUI spiel = new SpielGUI();
+        Spielverwaltung spiel = new Spielverwaltung(host);
     }
 }
