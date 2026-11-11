@@ -40,7 +40,7 @@ public class Main
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 400);
         frame.setLocationRelativeTo(null);
-        ImageIcon icon = new ImageIcon("bild1.png");
+        ImageIcon icon = new ImageIcon("bild1s2.png");
         
         
         
@@ -92,7 +92,7 @@ public class Main
         clientButton.addActionListener(e -> ipField.setEnabled(true));
         ipField.setEnabled(false);
         
-        frame.pack();
+        
         frame.setContentPane(root);
         frame.setVisible(true);
     }
