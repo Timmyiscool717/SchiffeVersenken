@@ -46,5 +46,18 @@ public class Karte extends JPanel
      */
     public void spielfeldKlick(int pPosX, int pPosY){
         System.out.println("Button" + pPosX + "|" + pPosY);
+        spielfeld[pPosX][pPosY].setEnabled(false);
+    }
+    public void klickbar(boolean pKlickbar){
+        boolean klickbar = pKlickbar;
+        for(int y = 0; y < spielfeld[0].length ; y ++){
+            for(int x = 0 ; x < spielfeld.length; x++){
+                if(klickbar){
+                    spielfeld[x][y].setEnabled(true);
+                }else{
+                    spielfeld[x][y].setEnabled(false);
+                }
+            }
+        }
     }
 }
