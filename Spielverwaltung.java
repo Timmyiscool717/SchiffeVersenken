@@ -14,13 +14,8 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
  
-/**
- * Beschreiben Sie hier die Klasse Spielverwaltung.
- * 
- * @author (Ihr Name) 
- * @version (eine Versionsnummer oder ein Datum)
- */
-public abstract class Spielverwaltung implements Netzwerk.Listener
+
+public class Spielverwaltung implements Netzwerk.Listener
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private boolean host;
@@ -34,6 +29,7 @@ public abstract class Spielverwaltung implements Netzwerk.Listener
     private JFrame frame;
     private JLabel statusLabel;
     private boolean spielBeendet = false;
+    
     
 
     /**
@@ -160,5 +156,9 @@ public abstract class Spielverwaltung implements Netzwerk.Listener
                     "Netzwerkfehler", JOptionPane.ERROR_MESSAGE);
             }
         });
+    }
+    @Override
+    public void nachrichtEmpfangen(String nachricht) {
+        //SwingUtilities.invokeLater(() -> verarbeiteNachricht(nachricht));
     }
 }

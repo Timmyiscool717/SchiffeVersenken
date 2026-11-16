@@ -112,6 +112,5 @@ public class Main
         frame.dispose();
         
         Spielverwaltung spiel = new Spielverwaltung(host);
-        spiel.start()
     }
 }

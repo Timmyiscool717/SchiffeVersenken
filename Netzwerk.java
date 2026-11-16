@@ -8,7 +8,6 @@ import java.io.*;
  */
 public class Netzwerk
 {
-    // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     public interface Listener{
         void nachrichtEmpfangen(String nachricht);
         void verbindungGeschlossen();
