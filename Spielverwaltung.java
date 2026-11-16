@@ -20,7 +20,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author (Ihr Name) 
  * @version (eine Versionsnummer oder ein Datum)
  */
-public class Spielverwaltung 
+public abstract class Spielverwaltung implements Netzwerk.Listener
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
     private boolean host;
@@ -30,6 +30,10 @@ public class Spielverwaltung
     private boolean gesetzt;
     private boolean horizontal;
     
+    private Netzwerk netzwerk1;
+    private JFrame frame;
+    private JLabel statusLabel;
+    private boolean spielBeendet = false;
     
 
     /**
@@ -101,5 +105,60 @@ public class Spielverwaltung
         
         }
     }
-    
+    public void verbinde(boolean alsHost, String ip, int port) {
+        Thread thread = new Thread(() -> {
+            try {
+                netzwerk1 = new Netzwerk();
+                netzwerk1.setListener(this);
+
+                if (alsHost) {
+                    setStatus("Warte auf den zweiten Spieler auf Port " + port + " ...");
+                    netzwerk1.start(port);
+                } else {
+                    setStatus("Verbinde mit " + ip + ":" + port + " ...");
+                    netzwerk1.client(ip, port);
+                }
+                setStatus("Verbunden. Warte auf Spielstart ...");
+                netzwerk1.send("READY");
+            } catch (Exception e) {
+                SwingUtilities.invokeLater(() -> {
+                    setStatus("Verbindung fehlgeschlagen.");
+                    JOptionPane.showMessageDialog(frame,
+                        "Verbindung konnte nicht hergestellt werden:\n" +
+                        e.getMessage(),
+                        "Netzwerkfehler", JOptionPane.ERROR_MESSAGE);
+                });
+            }
+        }, "Netzwerk-Verbindung");
+        thread.setDaemon(true);
+        thread.start();
+    }
+    private void setStatus(String text) {
+        if (statusLabel != null) {
+            SwingUtilities.invokeLater(() -> statusLabel.setText(text));
+        }
+    }
+    @Override
+    public void verbindungGeschlossen() {
+        SwingUtilities.invokeLater(() -> {
+            if (!spielBeendet) {
+                setStatus("Netzwerkverbindung beendet.");
+                JOptionPane.showMessageDialog(frame,
+                    "Die Verbindung zum anderen Spieler wurde beendet.",
+                    "Verbindung getrennt", JOptionPane.WARNING_MESSAGE);
+            }
+        });
+    }
+
+    @Override
+    public void verbindungsfehler(Exception e) {
+        SwingUtilities.invokeLater(() -> {
+            if (!spielBeendet) {
+                setStatus("Netzwerkfehler.");
+                JOptionPane.showMessageDialog(frame,
+                    "Netzwerkfehler:\n" + e.getMessage(),
+                    "Netzwerkfehler", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+    }
 }
