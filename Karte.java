@@ -33,6 +33,18 @@ public class Karte extends JPanel
                 final int posY = y;
                 spielfeld[x][y].setVisible(true);
                 spielfeld[x][y].addActionListener(e-> spielfeldKlick(posX,posY));
+                /**spielfeld[x][y].addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    Imageicon schiff = new Imageicon();
+                    button.setIcon(schiff);
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    button.setIcon(null);
+                }
+                }) ;*/
                 this.add(spielfeld[x][y]);
             }
         }
