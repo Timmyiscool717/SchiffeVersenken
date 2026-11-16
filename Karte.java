@@ -26,8 +26,8 @@ public class Karte extends JPanel
         for(int y=0;y< 10; y++){
             for(int x = 0; x < 10; x++){
                 spielfeld[x][y] = new JButton(); 
-                spielfeld[x][y].setBackground(Color.BLUE);
-                spielfeld[x][y].setForeground(Color.RED);
+                spielfeld[x][y].setBackground(Color.WHITE);
+                //spielfeld[x][y].setForeground(Color.RED);
                 spielfeld[x][y].setOpaque(true);
                 final int posX = x;
                 final int posY = y;
@@ -47,6 +47,7 @@ public class Karte extends JPanel
     public void spielfeldKlick(int pPosX, int pPosY){
         System.out.println("Button" + pPosX + "|" + pPosY);
         spielfeld[pPosX][pPosY].setEnabled(false);
+        
     }
     public void klickbar(boolean pKlickbar){
         boolean klickbar = pKlickbar;

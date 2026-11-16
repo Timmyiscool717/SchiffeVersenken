@@ -53,6 +53,7 @@ public class SpielGUI extends JFrame
         JLabel titelGegnerSeite = new JLabel("gegnerischer Spielplan", SwingConstants.CENTER);
         titelGegnerSeite.setFont(new Font("Arial", Font.BOLD, 25));
         Karte gegnerSpielplan = new Karte();
+        gegnerSpielplan.klickbar(false);
         gegnerSeite.add(gegnerSpielplan,BorderLayout.CENTER);
         gegnerSeite.add(titelGegnerSeite, BorderLayout.NORTH);
         
