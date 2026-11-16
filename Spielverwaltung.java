@@ -84,15 +84,15 @@ public class Spielverwaltung implements Netzwerk.Listener
     
     public void schiffePlatzieren(int pPosX,int pPosY){
         int[] laengen = {2, 2, 2, 2, 3, 3, 3, 4, 4, 5};
-        for (int i = 0; i < 9;i++){
+        for (int laenge : laengen){
             while(!gesetzt){
                 int x = pPosX;
                 int y = pPosY;
                 if(horizontal){
-                    int endeX = x + laengen[i];
+                    int endeX = x + (laenge-1);
                     int endeY = y;
                 }else{
-                    int endeY = y + laengen[i];
+                    int endeY = y + (laenge -1);
                     int endeX = x;
                 }
                 
