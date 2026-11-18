@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.io.File;
+import java.awt.event.*;
+
 /**
  * Beschreiben Sie hier die Klasse Karte.
  * 
@@ -33,18 +35,25 @@ public class Karte extends JPanel
                 final int posY = y;
                 spielfeld[x][y].setVisible(true);
                 spielfeld[x][y].addActionListener(e-> spielfeldKlick(posX,posY));
-                /**spielfeld[x][y].addMouseListener(new MouseAdapter() {
+                
+                spielfeld[x][y].addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    Imageicon schiff = new Imageicon();
-                    button.setIcon(schiff);
+                    System.out.println("Betrete Button" + posX + "|" + posY);
+                    ImageIcon schiff = new ImageIcon("Schiffteile/M.V.Schiff.png");
+                    final int x = posX;
+                    final int y = posY;
+                    spielfeld[x][y].setIcon(schiff);
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    button.setIcon(null);
+                    final int x = posX;
+                    final int y = posY;
+                    spielfeld[x][y].setIcon(null);
+                    System.out.println("Verlasse Button" + posX + "|" + posY);
                 }
-                }) ;*/
+                });
                 this.add(spielfeld[x][y]);
             }
         }
@@ -56,6 +65,8 @@ public class Karte extends JPanel
      * @param  y    ein Beispielparameter für eine Methode
      * @return        die Summe aus x und y
      */
+    
+    
     public void spielfeldKlick(int pPosX, int pPosY){
         System.out.println("Button" + pPosX + "|" + pPosY);
         spielfeld[pPosX][pPosY].setEnabled(false);
