@@ -30,7 +30,8 @@ public class Spielverwaltung implements Netzwerk.Listener
     private JLabel statusLabel;
     private boolean spielBeendet = false;
     
-    
+    private final char[][] eigenesFeld = new char[10][10];
+    private final char[][] gegnerFeld = new char[10][10];
 
     /**
      * Konstruktor für Objekte der Klasse Spielverwaltung
@@ -38,22 +39,14 @@ public class Spielverwaltung implements Netzwerk.Listener
     public Spielverwaltung(boolean host)
     {
         this.host = host;
-        /*schiffe[0]= new Schiff(2,0,0);
-        schiffe[1]= new Schiff(2,0,0);
-        schiffe[2]= new Schiff(2,0,0);
-        schiffe[3]= new Schiff(2,0,0);
-        schiffe[4]= new Schiff(3,0,0);
-        schiffe[5]= new Schiff(3,0,0);
-        schiffe[6]= new Schiff(3,0,0);
-        schiffe[7]= new Schiff(4,0,0);
-        schiffe[8]= new Schiff(4,0,0);
-        schiffe[9]= new Schiff(5,0,0);
+        
         
         spieler1 = new Spieler();
         spieler2 = new Spieler();
         aktuellerSpieler = spieler1;
         gesetzt = false;
-        horizontal = false;*/
+        horizontal = false;
+        
         SpielGUI gui = new SpielGUI();
     }
 
@@ -88,13 +81,23 @@ public class Spielverwaltung implements Netzwerk.Listener
             while(!gesetzt){
                 int x = pPosX;
                 int y = pPosY;
+                int endeY;
+                int endeX;
                 if(horizontal){
-                    int endeX = x + (laenge-1);
-                    int endeY = y;
+                     endeX = x + (laenge-1);
+                     endeY = y;
                 }else{
-                    int endeY = y + (laenge -1);
-                    int endeX = x;
+                     endeY = y + (laenge -1);
+                     endeX = x;
                 }
+                if (endeX >= 10 || endeY >= 10) continue;
+                
+                boolean frei = true;
+                
+                if (eigenesFeld[y + laenge-1][x + laenge-1] != '.') {
+                        frei = false;
+                        break;
+                    }
                 
                 
             }
