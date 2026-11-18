@@ -15,7 +15,7 @@ import java.awt.event.*;
  */
 public class Karte extends JPanel
 {
-    
+    private boolean horizontal = true;
     private JButton[][] spielfeld = new JButton[10][10]; 
     /**
      * Konstruktor für Objekte der Klasse Karte
@@ -43,6 +43,16 @@ public class Karte extends JPanel
                     ImageIcon schiff = new ImageIcon("Schiffteile/M.V.Schiff.png");
                     final int x = posX;
                     final int y = posY;
+                    int schiffLaenge = 3;
+                    if(horizontal){
+                        for(int i = 0; i < schiffLaenge; i++){
+                            spielfeld[x+i][y].setIcon(schiff);
+                        }
+                    }
+                    if(!horizontal){
+                        spielfeld[x][y].setIcon(schiff);
+                        spielfeld[x][y+(schiffLaenge - 1)].setIcon(schiff);
+                    }
                     spielfeld[x][y].setIcon(schiff);
                 }
 
