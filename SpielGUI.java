@@ -29,8 +29,9 @@ public class SpielGUI extends JFrame
     {
         fenster.add(hauptPanel);
         fenster.setTitle("Schiffe versenken");
-        fenster.setSize(1000, 900);
-        fenster.setMinimumSize(new Dimension(900, 700));
+        //fenster.setSize(1000, 900);
+        fenster.setMinimumSize(new Dimension(1500, 1000));
+        //fenster.setMinimumSize(new Dimension(900, 700));
         fenster.setBackground(Color.BLUE);
         fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
