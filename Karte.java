@@ -17,6 +17,7 @@ public class Karte extends JPanel
 {
     private boolean horizontal = true;
     private JButton[][] spielfeld = new JButton[10][10]; 
+    private int schiffLaenge = 5;
     /**
      * Konstruktor für Objekte der Klasse Karte
      */
@@ -43,24 +44,55 @@ public class Karte extends JPanel
                     ImageIcon schiff = new ImageIcon("Schiffteile/M.V.Schiff.png");
                     final int x = posX;
                     final int y = posY;
-                    int schiffLaenge = 3;
-                    if(horizontal){
+                    if(!spielfeld[x][y].isEnabled()){
+                        
+                    }
+                    if(horizontal && x+schiffLaenge-1 <= 9){
                         for(int i = 0; i < schiffLaenge; i++){
+                            if(i == 0){
+                                schiff = new ImageIcon("Schiffteile/H.R.Schiff.png");
+                            }else if(i == schiffLaenge - 1){
+                                schiff = new ImageIcon("Schiffteile/V.R.Schiff.png");
+                            }else{
+                                schiff = new ImageIcon("Schiffteile/M.V.Schiff.png");
+                            }
                             spielfeld[x+i][y].setIcon(schiff);
                         }
                     }
-                    if(!horizontal){
-                        spielfeld[x][y].setIcon(schiff);
-                        spielfeld[x][y+(schiffLaenge - 1)].setIcon(schiff);
+                    if(!horizontal && y+schiffLaenge-1 <= 9){
+                        for(int i = 0; i < schiffLaenge; i++){
+                            if(i == 0){
+                                schiff = new ImageIcon("Schiffteile/H.U.Schiff.png");
+                            }else if(i == schiffLaenge - 1){
+                                schiff = new ImageIcon("Schiffteile/V.U.Schiff.png");
+                            }else{
+                                schiff = new ImageIcon("Schiffteile/M.H.Schiff.png");
+                            }
+                            spielfeld[x][y+i].setIcon(schiff);
+                        }
                     }
-                    spielfeld[x][y].setIcon(schiff);
+                    
+                    
+                    //spielfeld[x][y].setIcon(schiff);
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
                     final int x = posX;
                     final int y = posY;
-                    spielfeld[x][y].setIcon(null);
+                    
+                    if(horizontal && x+schiffLaenge-1 <= 9){
+                        for(int i = 0; i < schiffLaenge; i++){
+                            spielfeld[x+i][y].setIcon(null);
+                        }
+                    }   
+                    if(!horizontal && y+schiffLaenge-1 <= 9){
+                        for(int i = 0; i < schiffLaenge; i++){
+                            spielfeld[x][y+i].setIcon(null);
+                        }
+                    }
+                    
+                    //spielfeld[x][y].setIcon(null);
                     System.out.println("Verlasse Button" + posX + "|" + posY);
                 }
                 });
@@ -81,6 +113,7 @@ public class Karte extends JPanel
         System.out.println("Button" + pPosX + "|" + pPosY);
         spielfeld[pPosX][pPosY].setEnabled(false);
         
+        
     }
     public void klickbar(boolean pKlickbar){
         boolean klickbar = pKlickbar;
@@ -93,5 +126,11 @@ public class Karte extends JPanel
                 }
             }
         }
+    }
+    public boolean feldEnabled(int pX, int pY, int pLaenge, boolean pHoirontal){
+        for(int i = 0; i < pLaenge; i++){
+            
+        }
+        return true;
     }
 }
