@@ -15,9 +15,9 @@ import java.awt.event.*;
  */
 public class Karte extends JPanel
 {
-    private boolean horizontal = true;
+    public boolean horizontal = true;
     private JButton[][] spielfeld = new JButton[10][10]; 
-    private int schiffLaenge = 5;
+    public int schiffLaenge = 5;
     private char[][] schiffFeld = new char[10][10]; 
     /**
      * Konstruktor für Objekte der Klasse Karte
@@ -26,6 +26,11 @@ public class Karte extends JPanel
     {
         setBackground(Color.BLACK);
         setPreferredSize(new Dimension(400,400));
+        for (int i = 0; i < 10; i++){
+            for(int j = 0; j < 10; j++){
+                schiffFeld[j][i] = '.';
+            }
+        }
         setLayout(new GridLayout(10, 10));
         for(int y=0;y< 10; y++){
             for(int x = 0; x < 10; x++){
@@ -116,13 +121,25 @@ public class Karte extends JPanel
     
     public void spielfeldKlick(int pPosX, int pPosY){
         System.out.println("Button" + pPosX + "|" + pPosY);
-        for(int i = 0; i < schiffLaenge; i++){
-            if(horizontal){
-                spielfeld[pPosX+i][pPosY].setEnabled(false);
-            }else{
-                spielfeld[pPosX][pPosY+i].setEnabled(false);
+        if(horizontal && pPosX+schiffLaenge-1 <= 9){
+            if(feldEnabled(pPosX,pPosY,schiffLaenge, horizontal)){
+                for(int i = 0; i < schiffLaenge; i++){
+                        spielfeld[pPosX+i][pPosY].setEnabled(false);
+                        spielfeld[pPosX+i][pPosY].setDisabledIcon(spielfeld[pPosX+i][pPosY].getIcon());
+                        schiffFeld[pPosX+i][pPosY] = 'S';
+                }
             }
         }
+        if(!horizontal && pPosY+schiffLaenge-1 <= 9){
+            if(feldEnabled(pPosX,pPosY,schiffLaenge, horizontal)){
+                for(int i = 0; i < schiffLaenge; i++){
+                        spielfeld[pPosX][pPosY+i].setEnabled(false);
+                        spielfeld[pPosX][pPosY+i].setDisabledIcon(spielfeld[pPosX][pPosY+i].getIcon());
+                        schiffFeld[pPosX][pPosY+i] = 'S';
+                }
+            }
+        }
+        
         //spielfeld[pPosX][pPosY].setEnabled(false);
     }
     public void klickbar(boolean pKlickbar){
