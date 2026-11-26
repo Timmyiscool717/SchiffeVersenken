@@ -21,9 +21,14 @@ public class SpielGUI extends JFrame
     private JPanel eigeneSeite = new JPanel();
     private JPanel buttons = new JPanel();
     private JButton drehen, schiff2, schiff3, schiff4, schiff5 ;
-    private Karte eigenerSpielplan = new Karte();
-    private Karte gegnerSpielplan = new Karte();
+    private Karte eigenerSpielplan = new Karte(this,false);
+    private Karte gegnerSpielplan = new Karte(this,true);
     private JPanel gegnerSeite = new JPanel();
+    
+    private int anzahlSchiff2 = 4;
+    private int anzahlSchiff3 = 3;
+    private int anzahlSchiff4 = 2;
+    private int anzahlSchiff5 = 1;
     //private BufferedImage spielbrettBild;
     //private ImageIcon spielbrettBild = new ImageIcon("beispiel_spielbrett_schiffeversenken.png");
     /**
@@ -92,8 +97,8 @@ public class SpielGUI extends JFrame
      */
     public void beispielMethode()
     {
-        Karte spielplan = new Karte();
-        hauptPanel.add(spielplan);
+        //Karte spielplan = new Karte();
+        //hauptPanel.add(spielplan);
     }
     public void drehenKlick(){
         if((drehen.getText()).equals("Vertikal")){
@@ -107,5 +112,44 @@ public class SpielGUI extends JFrame
     }
     public void schiffLaengeKlick(int pLaenge){
         eigenerSpielplan.schiffLaenge = pLaenge;
+    }
+    public void schiffPlatziert(int pSchiffLaenge){
+        switch(pSchiffLaenge){
+            case 2:
+                anzahlSchiff2 = anzahlSchiff2 - 1;
+                schiff2.setText("2er Schiff (" + anzahlSchiff2 + ")");
+                if(anzahlSchiff2 < 1){
+                    schiff2.setEnabled(false);
+                    eigenerSpielplan.schiffLaenge = 0;
+                }
+                break;
+            case 3:
+                anzahlSchiff3 = anzahlSchiff3 - 1;
+                schiff3.setText("3er Schiff (" + anzahlSchiff3 + ")");
+                if(anzahlSchiff3 < 1){
+                    schiff3.setEnabled(false);
+                    eigenerSpielplan.schiffLaenge = 0;
+                }
+                break;
+            case 4:
+                anzahlSchiff4 = anzahlSchiff4 - 1;
+                schiff4.setText("4er Schiff (" + anzahlSchiff4 + ")");
+                if(anzahlSchiff4 < 1){
+                    schiff4.setEnabled(false);
+                    eigenerSpielplan.schiffLaenge = 0;
+                }
+                break;
+            case 5:
+                anzahlSchiff5 = anzahlSchiff5 - 1;
+                schiff5.setText("5er Schiff (" + anzahlSchiff5 + ")");
+                schiff5.setEnabled(false);
+                eigenerSpielplan.schiffLaenge = 0;
+                break;
+        }
+        if(anzahlSchiff2 == 0 && anzahlSchiff3 == 0 && anzahlSchiff4 == 0 && anzahlSchiff5 == 0){
+            drehen.setText("Fertig");
+            drehen.setEnabled(false);
+            eigenerSpielplan.klickbar(false);
+        }
     }
 }

@@ -18,14 +18,19 @@ public class Karte extends JPanel
     public boolean horizontal = true;
     private JButton[][] spielfeld = new JButton[10][10]; 
     public int schiffLaenge = 5;
+    private SpielGUI gui;
     private char[][] schiffFeld = new char[10][10]; 
+    private boolean feind;
     /**
      * Konstruktor für Objekte der Klasse Karte
      */
-    public Karte()
+    public Karte(SpielGUI pGui, boolean pFeind)
     {
         setBackground(Color.BLACK);
-        setPreferredSize(new Dimension(400,400));
+        //setPreferredSize(new Dimension(400,400));
+        setSize(new Dimension(400,400));
+        gui = pGui;
+        feind = pFeind;
         for (int i = 0; i < 10; i++){
             for(int j = 0; j < 10; j++){
                 schiffFeld[j][i] = '.';
@@ -46,7 +51,7 @@ public class Karte extends JPanel
                 spielfeld[x][y].addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    System.out.println("Betrete Button" + posX + "|" + posY);
+                    //System.out.println("Betrete Button" + posX + "|" + posY);
                     ImageIcon schiff = new ImageIcon("Schiffteile/M.V.Schiff.png");
                     final int x = posX;
                     final int y = posY;
@@ -120,7 +125,7 @@ public class Karte extends JPanel
     
     
     public void spielfeldKlick(int pPosX, int pPosY){
-        System.out.println("Button" + pPosX + "|" + pPosY);
+        //System.out.println("Button" + pPosX + "|" + pPosY);
         if(horizontal && pPosX+schiffLaenge-1 <= 9){
             if(feldEnabled(pPosX,pPosY,schiffLaenge, horizontal)){
                 for(int i = 0; i < schiffLaenge; i++){
@@ -128,6 +133,7 @@ public class Karte extends JPanel
                         spielfeld[pPosX+i][pPosY].setDisabledIcon(spielfeld[pPosX+i][pPosY].getIcon());
                         schiffFeld[pPosX+i][pPosY] = 'S';
                 }
+                gui.schiffPlatziert(schiffLaenge);
             }
         }
         if(!horizontal && pPosY+schiffLaenge-1 <= 9){
@@ -137,6 +143,7 @@ public class Karte extends JPanel
                         spielfeld[pPosX][pPosY+i].setDisabledIcon(spielfeld[pPosX][pPosY+i].getIcon());
                         schiffFeld[pPosX][pPosY+i] = 'S';
                 }
+                gui.schiffPlatziert(schiffLaenge);
             }
         }
         
